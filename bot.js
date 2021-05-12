@@ -17,6 +17,23 @@ bot.on('ready', evt => {
     console.log(`Logged in as ${bot.user.tag}`)
 });
 
+bot.on("guildCreate", guild => {
+  
+    let defaultChannel = "";
+    guild.channels.cache.forEach((channel) => {
+      if(channel.type == "text" && defaultChannel == "") {
+        if(channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+          defaultChannel = channel;
+        }
+      }
+    })
+    //defaultChannel will be the channel object that the bot first finds permissions for
+    defaultChannel.send('A bot by Karan Batavia, use #swear <mention someone> to swear at someone.');
+    defaultChannel.send('Do not use on someone who is easily offended! XD');
+        
+       
+    });
+
 
 bot.on('message', message => {
     if (message.content.startsWith('#swear ')) {
