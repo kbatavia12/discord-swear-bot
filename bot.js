@@ -17,6 +17,7 @@ bot.on('ready', evt => {
     console.log(`Logged in as ${bot.user.tag}`)
 });
 
+//Used when bot is just added to the server
 bot.on("guildCreate", guild => {
   
     let defaultChannel = "";
