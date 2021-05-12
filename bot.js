@@ -20,6 +20,9 @@ bot.on('ready', evt => {
 
 bot.on('message', message => {
     if (message.content.startsWith('#swear ')) {
-        console.log(message.content);
+        let targetMember = message.mentions.members.first();
+
+        if (!targetMember) return message.reply('You need to tag a user to swear');
+        message.channel.send(`@${targetMember.user.id} ${randomWord()}`);
     }
 })
