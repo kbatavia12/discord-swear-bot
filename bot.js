@@ -52,10 +52,13 @@ bot.on('message', async message => {
 		// let number = message.content.split(' ')[1];
 		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark').then(res => res.data).catch(e => console.log(e))
 		message.react('🖕');
+		console.log(jokes.category);
 
 		if (jokes.category === "twopart") {
+			console.log(`${jokes.setup} \n ${jokes.delivery}`)
 			return message.reply(`${jokes.setup} \n ${jokes.delivery}`)
 		} else {
+			console.log(`${jokes.joke}`);
 			return message.reply(`${jokes.joke}`);
 		}
 
