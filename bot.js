@@ -56,8 +56,8 @@ bot.on('message', async message => {
 		// jokeHolder = jokes.data.jokes.slice();
 		console.log(jokes);
 
-		// const random = Math.floor(Math.random() * 10);
-		// return message.channel.send(jokes[random]);
+		const random = Math.floor(Math.random() * 10);
+		return message.channel.send(jokes[random]);
 
 	}
 })
