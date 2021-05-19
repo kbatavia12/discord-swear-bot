@@ -50,7 +50,7 @@ bot.on('message', message => {
 bot.on('message', async message => {
 	if (message.content.startsWith('#darkjoke ')) {
 		let number = message.content.split(' ')[1];
-		const jokes = await axios.get(process.env.API_URI)
+		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark?type=single&amount=10').catch(e => console.log(e))
 
 		console.log(jokes);
 
