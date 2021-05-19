@@ -50,13 +50,14 @@ bot.on('message', message => {
 bot.on('message', async message => {
 	if (message.content == '#darkjoke') {
 		// let number = message.content.split(' ')[1];
-		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark').then(res => res).catch(e => console.log(e))
+		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark').then(res => res.data).catch(e => console.log(e))
+		message.react('🖕');
 
-		// jokeHolder = jokes.data.jokes.slice();
-		console.log(jokes);
-
-		// const random = Math.floor(Math.random() * 10);
-		// return message.reply(jokes.joke);
+		if (jokes.category === "twopart") {
+			return message.reply(`${jokes.setup} \n ${jokes.delivery}`)
+		} else {
+			return message.reply(`${jokes.joke}`);
+		}
 
 	}
 })
