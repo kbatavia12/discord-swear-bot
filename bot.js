@@ -57,7 +57,7 @@ bot.on('message', async message => {
 		console.log(jokes);
 
 		const random = Math.floor(Math.random() * 10);
-		console.log(jokes[random].joke);
+		return message.reply(jokes[random].joke);
 
 	}
 })
