@@ -48,16 +48,15 @@ bot.on('message', message => {
 
 
 bot.on('message', async message => {
-	if (message.content.startsWith('#darkjoke ')) {
+	if (message.content == '#darkjoke') {
 		// let number = message.content.split(' ')[1];
-		let jokeHolder = [];
-		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark?type=single&amount=10').then(res => res.data.jokes).catch(e => console.log(e))
+		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark').then(res => res.data.jokes).catch(e => console.log(e))
 
 		// jokeHolder = jokes.data.jokes.slice();
 		console.log(jokes);
 
-		const random = Math.floor(Math.random() * 10);
-		return message.reply(jokes[random].joke);
+		// const random = Math.floor(Math.random() * 10);
+		// return message.reply(jokes.joke);
 
 	}
 })
