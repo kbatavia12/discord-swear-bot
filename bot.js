@@ -49,19 +49,14 @@ bot.on('message', message => {
 
 bot.on('message', async message => {
 	if (message.content.startsWith('#darkjoke ')) {
-		let number = message.content.split(' ')[1];
+		// let number = message.content.split(' ')[1];
 		let jokeHolder = [];
 		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark?type=single&amount=10').catch(e => console.log(e))
 
 		jokeHolder = jokes.data.jokes.slice();
-
-		message.reply(`Here you go ${randomWord(words.length)}`);
-
-		for (let i = 0; i < number; i++) {
-			const random = Math.floor(Math.random() * number);
-			console.log(jokeHolder[random]);
-			message.channel.send(jokeHolder[random]);
-		}
+		
+		const random = Math.floor(Math.random() * number);
+		return message.channel.send(jokeHolder[random]);
 
 	}
 })
