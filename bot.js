@@ -52,14 +52,14 @@ bot.on('message', async message => {
 		let number = message.content.split(' ')[1];
 		let jokeHolder = [];
 		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark?type=single&amount=10').catch(e => console.log(e))
-		let targetMember = message.mentions.members.first();
 
 		jokeHolder = jokes.data.jokes.slice();
 
-		message.channel.send(`<@${targetMember.user.id}> Here you go ${randomWord(words.length)}`);
+		message.reply(`Here you go ${randomWord(words.length)}`);
 
 		for (let i = 0; i < number; i++) {
 			const random = Math.floor(Math.random() * number);
+			console.log(jokeHolder[random]);
 			message.channel.send(jokeHolder[random]);
 		}
 
