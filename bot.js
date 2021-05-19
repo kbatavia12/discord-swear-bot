@@ -51,12 +51,13 @@ bot.on('message', async message => {
 	if (message.content.startsWith('#darkjoke ')) {
 		// let number = message.content.split(' ')[1];
 		let jokeHolder = [];
-		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark?type=single&amount=10').catch(e => console.log(e))
+		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark?type=single&amount=10').then(res => res.data.jokes).catch(e => console.log(e))
 
-		jokeHolder = jokes.data.jokes.slice();
-		
-		const random = Math.floor(Math.random() * 10);
-		return message.channel.send(jokeHolder[random]);
+		// jokeHolder = jokes.data.jokes.slice();
+		console.log(jokes);
+
+		// const random = Math.floor(Math.random() * 10);
+		// return message.channel.send(jokes[random]);
 
 	}
 })
