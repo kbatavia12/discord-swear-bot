@@ -54,10 +54,10 @@ bot.on('message', async message => {
 		message.react('🖕');
 		console.log(jokes.category);
 
-		if (jokes.category === "twopart") {
+		if (jokes.type === "twopart") {
 			console.log(`${jokes.setup} \n ${jokes.delivery}`)
 			return message.reply(`${jokes.setup} \n ${jokes.delivery}`)
-		} else {
+		} else if (jokes.type === "single") {
 			console.log(`${jokes.joke}`);
 			return message.reply(`${jokes.joke}`);
 		}
