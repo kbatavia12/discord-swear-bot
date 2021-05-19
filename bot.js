@@ -8,8 +8,8 @@ const BOT_TOKEN = process.env.BOT_TOKEN
 const bot = new Discord.Client()
 bot.login(BOT_TOKEN);
 
-const randomWord = () => {
-	const randomIndex = Math.floor(Math.random() * words.length);
+const randomWord = (limit) => {
+	const randomIndex = Math.floor(Math.random() * limit);
 
 	return words[randomIndex];
 }
@@ -42,7 +42,7 @@ bot.on('message', message => {
 		let targetMember = message.mentions.members.first();
 
 		if (!targetMember) return message.reply('You need to tag a user to swear');
-		message.channel.send(`<@${targetMember.user.id}> ${randomWord()}`);
+		message.channel.send(`<@${targetMember.user.id}> ${randomWord(words.length)}`);
 	}
 })
 
@@ -50,9 +50,18 @@ bot.on('message', message => {
 bot.on('message', async message => {
 	if (message.content.startsWith('#darkjoke ')) {
 		let number = message.content.split(' ')[1];
+		const jokeHolder = [];
 		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark?type=single&amount=10').catch(e => console.log(e))
+		let targetMember = message.mentions.members.first();
 
-		console.log(jokes);
+		jokeHolder = jokes.data.jokes.slice();
+
+		message.channel.send(`<@${targetMember.user.id}> Here you go ${randomWord(words.length)}`);
+
+		for (let i = 0; i < number; i++) {
+			const random = Math.floor(Math.random() * number);
+			message.channel.send(jokeHolder[random]);
+		}
 
 	}
 })
