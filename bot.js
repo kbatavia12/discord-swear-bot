@@ -55,7 +55,7 @@ bot.on('message', async message => {
 
 		jokeHolder = jokes.data.jokes.slice();
 		
-		const random = Math.floor(Math.random() * number);
+		const random = Math.floor(Math.random() * 10);
 		return message.channel.send(jokeHolder[random]);
 
 	}
