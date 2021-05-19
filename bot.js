@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const Discord = require('discord.js');
 const dotenv = require('dotenv').config();
 const words = require('./words.json')
@@ -49,7 +50,7 @@ bot.on('message', message => {
 bot.on('message', async message => {
 	if (message.content.startsWith('#darkjoke ')) {
 		let number = message.content.split(' ')[1];
-		const jokes = await fetch(process.env.API_URI)
+		const jokes = await axios.get(process.env.API_URI)
 
 		console.log(jokes);
 
