@@ -38,30 +38,29 @@ bot.on("guildCreate", guild => {
 
 
 bot.on('message', message => {
-	
+	if (message.content.startsWith('#swear ')) {
+		let targetMember = message.mentions.members.first();
 
-	switch(message) {
-		case message.content.startsWith('#swear '): {
-			let targetMember = message.mentions.members.first();
-			if (!targetMember) return message.reply('You need to tag a user to swear');
-			message.channel.send(`<@${targetMember.user.id}> ${randomWord(words.length)}`);
-		}
+		if (!targetMember) return message.reply('You need to tag a user to swear');
+		message.channel.send(`<@${targetMember.user.id}> ${randomWord(words.length)}`);
+	}
+})
 
-		case (message.content == '#darkjoke'): {
-			const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark').then(res => res.data).catch(e => console.log(e))
-				message.react('🖕');
-				console.log(jokes.category);
 
-			if (jokes.type === "twopart") {
-				console.log(`${jokes.setup} \n ${jokes.delivery}`)
-				return message.reply(`${jokes.setup} \n ${jokes.delivery}`)
-			} else if (jokes.type === "single") {
-				console.log(`${jokes.joke}`);
-				return message.reply(`${jokes.joke}`);
-			}
+bot.on('message', async message => {
+	if (message.content == '#darkjoke') {
+		// let number = message.content.split(' ')[1];
+		const jokes = await axios.get('https://v2.jokeapi.dev/joke/Dark').then(res => res.data).catch(e => console.log(e))
+		message.react('🖕');
+		console.log(jokes.category);
+
+		if (jokes.type === "twopart") {
+			console.log(`${jokes.setup} \n ${jokes.delivery}`)
+			return message.reply(`${jokes.setup} \n ${jokes.delivery}`)
+		} else if (jokes.type === "single") {
+			console.log(`${jokes.joke}`);
+			return message.reply(`${jokes.joke}`);
 		}
 
 	}
-
 })
-
